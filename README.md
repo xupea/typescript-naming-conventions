@@ -594,3 +594,5 @@ https://www.freecodecamp.org/news/javascript-naming-conventions-dos-and-don-ts-9
 https://guoyunhe.me/2021/03/07/programming-english-basics/
 
 https://hackernoon.com/software-complexity-naming-6e02e7e6c8cb
+
+https://www.cyningsun.com/07-04-2020/how-to-naming-things.html
