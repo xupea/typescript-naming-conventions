@@ -592,3 +592,5 @@ https://github.com/kettanaito/naming-cheatsheet
 https://www.freecodecamp.org/news/javascript-naming-conventions-dos-and-don-ts-99c0e2fdd78a/
 
 https://guoyunhe.me/2021/03/07/programming-english-basics/
+
+https://hackernoon.com/software-complexity-naming-6e02e7e6c8cb
