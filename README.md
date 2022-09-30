@@ -1,4 +1,20 @@
-# Javascript / Typescript代码命名规范
+# Javascript / Typescript 命名规范和最佳实践 v1
+
+> Programs are meant to be read by humans and only incidentally for computers to execute. 
+>
+> -- Donald Knuth
+
+> Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
+>
+> -- Matin Fowler
+
+> There are only two hard things in Computer Science: cache invalidation and naming things.
+>
+> -- Phil Karlton
+
+编写代码从来不是一件容易的事情。代码除了要实现指定的业务功能，还要方便Ta人理解和维护，这就有点像写技术文章，既要解决现实中的问题，又要方便读者理解。
+
+个人认为 **命名** 是软件开发工程师首项基本功，不管是领域驱动开发（DDD）还是重构，你都会遇到 **命名** ，希望本篇文章可以帮助到那些想要编写出易于维护的代码的开发人员。
 
 
 
@@ -6,33 +22,23 @@
 
 ### 1.1 符合英语语法
 
-> Programs are meant to be read by humans and only incidentally for computers to execute. 
->
-> -Donald Knuth
-
-> Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
->
-> -Matin Fowler
-
-既然使用英语来命名，英文单词拼写正确和符合英文语法是最基本的。为了方便Ta人阅读和理解，你需要了解：
+既然使用英语来命名，单词拼写正确和符合语法规则是最基本的。为了方便Ta人阅读和理解，你需要知道：
 
 1.词性（包括名词/复数，动词/分词，形容词，介词，连词，量词）
 
-2.时态
+2.基本句型
 
 
 
 **示例**：
 
 ```typescript
-// ❌
+// ❌ 不符合语法
 function completedTranslate(chapterIds: string[]) {
-	const chapters = repository.findByChapterIdIn(chapterIds);
-  chapters.forEach(chapter => completedTranslate(chapter));
-  repository.saveAll(chapters);
+  ...
 }
 
-// ✅
+// ✅ 符合语法：动宾结构 或 谓语+宾语结构
 function completeTranslation() {
   ...
 }
@@ -40,16 +46,20 @@ function completeTranslation() {
 
 
 
-vscode单词拼写检查插件：https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
+vscode 单词拼写检查插件推荐：https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
 
 
 
-### 1.2 一致性
+### 1.2 表达保持一致
 
-当存在多种可能的表达时，选择一种然后统一
+当存在多种可能的表达词语时，选择一种然后统一。
+
+
+
+**示例：**
 
 ```typescript
-// ❌
+// ❌ 存在多种表达获取的英文单词
 function getUsers() {}
 function fetchBooks() {}
 function retriveAuthors() {}
@@ -62,12 +72,16 @@ function fetchAuthors() {}
 
 
 
-### 1.3 精准描述
+### 1.3 精准的描述
 
-避免使用 data，info， flag，process，handle，maintain，manage，modify等这些宽泛的单词，使用具体业务上下文名称。
+避免使用 data，info， flag，process，handle，maintain，manage，modify等这些宽泛的单词，应该使用具体业务上下文名称。
+
+
+
+**示例：**
 
 ```typescript
-// ❌
+// ❌ data 无法表明具体返回的数据内容
 function fetchData() {}
 
 // ✅
@@ -79,6 +93,10 @@ function fetchUsers() {}
 ### 1.4 不要使用技术术语命名
 
 使用技术术语命名是一种基于实现细节的命名方式，而实现细节是容易变化的，所以应该使用业务语言来命名。
+
+
+
+**示例：**
 
 ```typescript
 // ❌
@@ -97,7 +115,11 @@ const bookNames = ['战争与和平', '巴黎圣母院', '童年'];
 
 ### 1.5 描述意图，而非实现细节
 
-命名要对实现的细节进行抽象，而不是对实现细节的陈述
+命名要对实现的细节进行抽象，而不是对实现细节的陈述。
+
+
+
+**示例：**
 
 ```typescript
 // ❌
@@ -127,6 +149,10 @@ function startTranslation(chapterId: string) {
 
 在不看函数的文档的前提下，通过名称可以尽可能地理解其意图。
 
+
+
+**示例：**
+
 ```typescript
 // ❌
 function findBooks(author) {}
@@ -139,7 +165,11 @@ function findBooksByAuthor(author) {}
 
 ### 1.7 避免缩写
 
-不要用缩写和自己创造缩写，缩写非常影响可阅读性
+不要用缩写和自己创造缩写，缩写非常影响可阅读性。
+
+
+
+**示例：**
 
 ```typescript
 // ❌
@@ -151,7 +181,7 @@ const onItemClick = () => {}
 
 
 
-## 2. 基础原则
+## 2. 最佳实践
 
 ### 2.1 常量
 
@@ -162,6 +192,7 @@ const onItemClick = () => {}
 **示例**：
 
 ```javascript
+// ✅
 const DAYS_UNTIL_TOMORROW = 1;
 
 const PI = 3.14;
@@ -365,7 +396,7 @@ prefix? + action (A) + high context (HC) + low context? (LC)
 
 
 
-### 1.4 复杂的函数
+### 2.4 复杂的函数
 
 1.识别所有任务（单一职责，可测试）
 
@@ -377,7 +408,7 @@ prefix? + action (A) + high context (HC) + low context? (LC)
 
 
 
-### 1.5 枚举
+### 2.5 枚举
 
 **命名规范**：大驼峰式，枚举值使用大驼峰 或 UPPER_SNAKE_CASE
 
@@ -406,7 +437,7 @@ enum Status {
 
  
 
-### 1.6 类
+### 2.6 类
 
 **大驼峰式**：大驼峰式
 
@@ -463,7 +494,7 @@ class MenuItem {
 
 
 
-### 1.7 接口
+### 2.7 接口
 
 **大驼峰式**：大驼峰式
 
@@ -479,7 +510,7 @@ interface State { }
 
 
 
-#### 不适用 `I` 作为接口名的前缀
+#### 不使用 `I` 作为接口名的前缀
 
 类和接口都是某种意义上的抽象和封装，继承时不需要关心它是一个接口还是一个类。如果用`I`前缀，当一个变量的类型更改了，比如由接口变成了类，那变量名称就必须同步更改。
 
@@ -499,15 +530,13 @@ interface State {
 
 
 
+## 3. 业务名词表
 
-
-## 3. 名词表
-
-DDD领域统一语言或者业务词汇表
+命名中的业务名词，推荐使用DDD领域统一语言或者业务词汇表，这个名称表最好在项目的开始时就和业务，以及前后端一起确定所有业务对应的中英文对照。
 
 
 
-## 4. 动词表
+## 4. 命名常用动词表
 
 get 获取/         set 设置,           add 增加/          remove 删除
 
@@ -567,32 +596,8 @@ reset 重置/
 
 
 
-## 5. 命名翻译网站：
+## 5. 命名翻译网站推荐：
 
 https://unbug.github.io/codelf
 
 https://fanyi.phpstudyhelper.com/
-
-
-
-## 6. 资料参考：
-
-https://javascript.plainenglish.io/the-ultimate-guide-to-javascript-naming-conventions-f3e371efb0d1
-
-https://javascript.plainenglish.io/javascript-naming-convention-best-practices-b2065694b7d
-
-https://blog.frankmtaylor.com/2021/10/21/a-small-guide-for-naming-stuff-in-front-end-code/#naming-things-in-javascript
-
-https://github.com/kettanaito/naming-cheatsheet
-
-https://www.jianshu.com/p/3ecdb9c66a2a
-
-https://github.com/kettanaito/naming-cheatsheet
-
-https://www.freecodecamp.org/news/javascript-naming-conventions-dos-and-don-ts-99c0e2fdd78a/
-
-https://guoyunhe.me/2021/03/07/programming-english-basics/
-
-https://hackernoon.com/software-complexity-naming-6e02e7e6c8cb
-
-https://www.cyningsun.com/07-04-2020/how-to-naming-things.html
